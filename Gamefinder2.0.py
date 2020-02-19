@@ -15,32 +15,61 @@ class Screen(tk.Frame):
         current =0
         def __init__(self):
                 tk.Frame.__init__(self)
-
-
                 
+        def switch_frame():
+                screens[Screen.current].tkraise()
+                        
+                        
+                        
 
 
 class MainMenu(Screen):
         def __init__(self):
                 Screen.__init__(self)
+
+              
+             
+                
                 self.lbl_title = tk.Label(self,text="Game Library",font=("Arial","25"))
                 self.lbl_title.grid(row=0,column=0,sticky="news")
                 
-                self.btn_add=tk.Button(self,text="Add",bg="blue",font=("Arial","15"))
+                self.btn_add=tk.Button(self,text="Add",bg="blue",font=("Arial","15"), command= self.go_add)
                 self.btn_add.grid(row=1,column=0)
                 
-                self.btn_edit=tk.Button(self,text="Edit",bg="blue",font=("Arial","15"))
+                
+                
+                self.btn_edit=tk.Button(self,text="Edit",bg="blue",font=("Arial","15"), command= self.go_edit)
                 self.btn_edit.grid(row=2,column=0)
                 
                 self.btn_search=tk.Button(self,text="Search", bg="blue",
-                                      font=("Arial","15"))
+                                      font=("Arial","15"), command= self.go_search)
                 self.btn_search.grid(row=3,column=0)
                 
-                self.btn_remove=tk.Button(self,text="Remove",bg="blue",font=("Arial","15"))
+                self.btn_remove=tk.Button(self,text="Remove",bg="blue",font=("Arial","15"), command= self.go_remove)
                 self.btn_remove.grid(row=4,column=0)
                 
-                self.btn_save=tk.Button(self,text="Save",bg="blue",font=("Arial","15"))
+                self.btn_save=tk.Button(self,text="Save",bg="blue",font=("Arial","15"), command= self.go_save)
                 self.btn_save.grid(row=5,column=0)
+                
+        def go_add(self):
+                Screen.current=2
+                Screen.switch_frame() 
+                
+        def go_search(self):
+                Screen.current=1
+                Screen.switch_frame() 
+                
+        def go_edit(self):
+                Screen.current=3
+                Screen.switch_frame() 
+                
+        def go_remove(self):
+                Screen.current=4
+                Screen.switch_frame() 
+                
+        def go_save(self):
+                Screen.current=5
+                Screen.switch_frame()                 
                 
                 #self.grid_columnconfigure(0,weight=1)
                 #self.grid_columnconfigure(1,weight=1)
@@ -123,7 +152,7 @@ class Search(Screen):
                 '''
                 self.edit_space.insert('insert', mytext)
                 
-                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=6,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
@@ -140,7 +169,9 @@ class Search(Screen):
                 self.grid_columnconfigure(2,weight=1)                 
                 self.grid_columnconfigure(3,weight=1)
             
-    
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame()    
     
 class Add(Screen):
         def __init__(self):
@@ -217,7 +248,7 @@ class Add(Screen):
                 '''
                 self.edit_space.insert('insert', mytext)
                 
-                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=6,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
@@ -233,7 +264,9 @@ class Add(Screen):
                 self.grid_columnconfigure(2,weight=1) 
                 self.grid_columnconfigure(3,weight=1) 
                 
-                
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame()         
 
 class Edit(Screen):
         def __init__(self):
@@ -250,7 +283,7 @@ class Edit(Screen):
                 self.name.grid(row = 1, column = 0, sticky='news') 
                                 
                 
-                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=6,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Ok",font=("Arial","15"))
@@ -259,7 +292,9 @@ class Edit(Screen):
                 self.grid_columnconfigure(0,weight=1)
                 self.grid_columnconfigure(1,weight=1)                
         
-
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame() 
 
 class Remove(Screen):
         def __init__(self):
@@ -279,7 +314,7 @@ class Remove(Screen):
                 self.game_remove.grid(row = 2, column = 0, sticky='news')
                 background = self.game_remove.cget("bg")                
                 
-                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=3,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Remove",font=("Arial","15"))
@@ -287,6 +322,10 @@ class Remove(Screen):
                 
                 self.grid_columnconfigure(0,weight=1)
                 self.grid_columnconfigure(1,weight=1)
+                
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame() 
                 
                 
 class Verify(tk.Frame):
@@ -317,7 +356,7 @@ class Verify(tk.Frame):
                 '''
                 self.edit_space.insert('insert', mytext)                
                 
-                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=6,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Verify",font=("Arial","15"))
@@ -326,6 +365,10 @@ class Verify(tk.Frame):
                 self.grid_columnconfigure(0,weight=5)
                 self.grid_columnconfigure(1,weight=5)
                 
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame()                 
+                
 class Save(Screen):
         def __init__(self):
                 Screen.__init__(self)
@@ -333,8 +376,12 @@ class Save(Screen):
                 self.Title = tk.Label(self,text="File saved. ", font=("arial","18"))
                 self.Title.grid(row=0,column=0,sticky="news")
                 
-                self.btn_cancel=tk.Button(self,text="OK",font=("Arial","15"))
+                self.btn_cancel=tk.Button(self,text="OK",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=1,column=0)
+                
+        def go_home(self):
+                Screen.current=0
+                Screen.switch_frame()                 
                 
 
 
@@ -373,29 +420,13 @@ if __name__ == "__main__":
         screens[4].grid(row=0, column=0,sticky="news")
         screens[5].grid(row=0, column=0,sticky="news")
         
-        #screens[0].tkraise()
-        #screens[1].tkraise()
-        #screens[2].tkraise()
-        screens[3].tkraise()
-        #screens[4].tkraise()
-        #screens[5].tkraise()
+        Screen.current=0
+        Screen.switch_frame()
         
+
         root.mainloop()   
         
         #uncomment these to make them visible
         
-        #main_menu=MainMenu()
-        #main_menu.grid(row=0, column=0,sticky=("news"))
-        #search_screen = Search()
-        #search_screen.grid(row = 0, column = 0)
-        #add_screen = Add()
-        #add_screen.grid(row = 0, column = 0)
-        #edit_screen = Edit()
-        #edit_screen.grid(row = 0, column = 0) 
-        #remove_screen = Remove()
-        #remove_screen.grid(row = 0, column = 0) 
-        #verify_screen = Verify()
-        #verify_screen.grid(row = 0, column = 0)  
-        #save_screen = Save()
-        #save_screen.grid(row = 0, column = 0)          
+       
     
