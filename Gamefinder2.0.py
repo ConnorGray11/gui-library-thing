@@ -278,7 +278,10 @@ class Edit_Select(tk.Frame):
         def __init__(self, parent):
                 tk.Frame.__init__(self,master =  parent)
                 self.parent=parent
-                self.options=["one","two"]
+                self.options=["Select a game"]
+                
+                for key in games.keys():
+                        self.options.append(games[key][1])
                 self.tkvar=tk.StringVar(self)
                 self.tkvar.set(self.options[0])
                 
@@ -293,8 +296,8 @@ class Edit_Select(tk.Frame):
                 self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.cancel)
                 self.btn_cancel.grid(row=6,column=0)
                 
-                self.btn_clear=tk.Button(self,text="Ok",font=("Arial","15"),command= self.go_edit)
-                self.btn_clear.grid(row=6,column=1) 
+                self.btn_Go=tk.Button(self,text="Ok",font=("Arial","15"),command= self.go_edit)
+                self.btn_Go.grid(row=6,column=1) 
                 
                 self.grid_columnconfigure(0,weight=1)
                 self.grid_columnconfigure(1,weight=1)                
@@ -303,14 +306,29 @@ class Edit_Select(tk.Frame):
                 self.parent.destroy()
                 
         def go_edit(self):
-                Screen.current=3
-                Screen.switch_frame()
-                self.parent.destroy()
-                
+                if self.tkvar.get()==self.options[0]:
+                        pass
+                else:
+                        Screen.current=3
+                        if self.tkvar.get == self.options:
+                                pass
+                        else:
+                               
+                                for i in range(len(self.options)):
+                                        if self.tkvar.get()==self.options[i]:
+                                                
+                                                screens[3].edit_key=i
+                                                screens[3].edit_update()
+                                                break                        
+                        Screen.switch_frame()
+                        self.parent.destroy()
+                        
+                        
                 
 class Edit(Screen):
         def __init__(self):
                 Screen.__init__(self)
+                self.edit_key = 0
                 self.options=["one","two"]
                 self.tkvar=tk.StringVar(self)
                 self.tkvar.set(self.options[0])
@@ -323,37 +341,37 @@ class Edit(Screen):
                 self.Title = tk.Label(self,text="Title:", font=("arial","18"))
                 self.Title.grid(row=1,column=2,sticky="news") 
                 
-                self.add_title = tk.Entry(self)
-                self.add_title.grid(row = 1, column =3)
-                background = self.add_title.cget("bg")        
+                self.edit_title = tk.Entry(self)
+                self.edit_title.grid(row = 1, column =3)
+                background = self.edit_title.cget("bg")        
                 
                 self.Genre = tk.Label(self,text="Genre:", font=("arial","18"))
                 self.Genre.grid(row=1,column=0,sticky="news")
                 
-                self.add_Genre = tk.Entry(self)
-                self.add_Genre.grid(row = 1, column = 1)
-                background = self.add_Genre.cget("bg")        
+                self.edit_Genre = tk.Entry(self)
+                self.edit_Genre.grid(row = 1, column = 1)
+                background = self.edit_Genre.cget("bg")        
                 
                 self.dev = tk.Label(self,text="Dev:", font=("arial","18"))
                 self.dev.grid(row=2,column=0,sticky="news")
                 
-                self.add_Dev = tk.Entry(self)
-                self.add_Dev.grid(row = 2, column = 1)
-                background = self.add_Dev.cget("bg")        
+                self.edit_Dev = tk.Entry(self)
+                self.edit_Dev.grid(row = 2, column = 1)
+                background = self.edit_Dev.cget("bg")        
                 
                 self.Pub = tk.Label(self,text="Pub:", font=("arial","18"))
                 self.Pub.grid(row=2,column=2,sticky="news")
                 
-                self.add_Pub = tk.Entry(self)
-                self.add_Pub.grid(row = 2, column = 3)
-                background = self.add_Pub.cget("bg")        
+                self.edit_Pub = tk.Entry(self)
+                self.edit_Pub.grid(row = 2, column = 3)
+                background = self.edit_Pub.cget("bg")        
             
                 self.Year = tk.Label(self,text="Year:", font=("arial","18"))
                 self.Year.grid(row=3,column=0,sticky="news")
                 
-                self.add_year = tk.Entry(self)
-                self.add_year.grid(row = 3, column = 1)
-                background = self.add_year.cget("bg") 
+                self.edit_year = tk.Entry(self)
+                self.edit_year.grid(row = 3, column = 1)
+                background = self.edit_year.cget("bg") 
                 
                 self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
                 self.Notes.grid(row=4,column=0,sticky="news")
@@ -361,7 +379,7 @@ class Edit(Screen):
                 self.rating = tk.Label(self,text="Rating:", font=("arial","18"))
                 self.rating.grid(row=4,column=2,sticky="news")
                 
-                self.Rating = tk.OptionMenu(self, self.tkvar,*self.options)                
+                self.Rating = tk.Entry(self)               
                 self.Rating.grid(row = 4, column = 3, sticky='news') 
                 background = self.Rating.cget("bg")                
                 
@@ -389,7 +407,7 @@ class Edit(Screen):
                 self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
                 self.btn_clear.grid(row=6,column=1)
                 
-                self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"))
+                self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"),command= self.submit_edit)
                 self.btn_submit.grid(row=6,column=3) 
                 
                 
@@ -399,13 +417,46 @@ class Edit(Screen):
                 self.grid_columnconfigure(2,weight=1) 
                 self.grid_columnconfigure(3,weight=1) 
                 
+                
+                
+        def edit_update(self):
+                print("check check")
+                entry = games[self.edit_key]
+                self.edit_Genre.delete(0,"end")
+                self.edit_Genre.insert(0,entry[0])
+                
+                self.edit_Dev.delete(0,"end")
+                self.edit_Dev.insert(0,entry[2])
+                
+                self.edit_Pub.delete(0,"end")
+                self.edit_Pub.insert(0,entry[3])
+                
+                self.edit_title.delete(0,"end")
+                self.edit_title.insert(0,entry[1])
+                
+                self.edit_year.delete(0,"end")
+                self.edit_year.insert(0,entry[10])
+                
         def go_home(self):
                 Screen.current=0
                 Screen.switch_frame()
+                
+         #oh boy the submit command       
+        def submit_edit(self):
+                entry =[]
+                entry.append(self.edit_Genre.get())
+                entry.append(self.edit_title.get())
+                entry.append(self.edit_Dev.get())
+                entry.append(self.edit_Pub.get())
+                entry.append(self.edit_year.get())
+                games[self.edit_key]=entry
+                
+                Screen.current=0
+                Screen.switch_frame()                
 
 class Remove(tk.Frame):
-        def __init__(self, parent):
-                tk.Frame.__init__(self,master =  parent)
+        def __init__(self):
+                tk.Frame.__init__(self)
                 
                 self.options=["one","two"]
                 self.tkvar=tk.StringVar(self)
@@ -437,7 +488,7 @@ class Remove(tk.Frame):
                 
 class Verify(tk.Frame):
         def __init__(self, remove): 
-                tk.Frame.__init__(self, master = remove)
+                tk.Frame.__init__(self, master = parent)
                 
                 self.Title = tk.Label(self,text="These games are ", font=("arial","18"))
                 self.Title.grid(row=0,column=0,sticky="news")
@@ -517,16 +568,16 @@ if __name__ == "__main__":
         screens.append(Add())  
         #screens.append(Edit_Select())
         screens.append(Edit()) 
-        #screens.append(Remove())  
-        #screens.append(Save())  
+        screens.append(Remove())  
+        screens.append(Save())  
         
         
         screens[0].grid(row=0, column=0,sticky="news")
         screens[1].grid(row=0, column=0,sticky="news")
         screens[2].grid(row=0, column=0,sticky="news")
         screens[3].grid(row=0, column=0,sticky="news")
-        #screens[4].grid(row=0, column=0,sticky="news")
-        #screens[5].grid(row=0, column=0,sticky="news")
+        screens[4].grid(row=0, column=0,sticky="news")
+        screens[5].grid(row=0, column=0,sticky="news")
         
         Screen.current=0
         Screen.switch_frame()
