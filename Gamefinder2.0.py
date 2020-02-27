@@ -85,7 +85,9 @@ class MainMenu(Screen):
                         #search.tkraise(self)
                         
 
-        
+         #so in case other people use this this was made and designed by connor Gray 
+         
+         #you can search stuff up here
 class Search(Screen):
         def __init__(self):
                 Screen.__init__(self)
@@ -178,7 +180,8 @@ class Search(Screen):
         def go_home(self):
                 Screen.current=0
                 Screen.switch_frame()    
-    
+   #so in case other people use this this was made and designed by connor Gray 
+   #you can add files to the program here
 class Add(Screen):
         def __init__(self):
                 Screen.__init__(self)
@@ -188,8 +191,15 @@ class Add(Screen):
                 
                                    
 
-                self.lbl_title = tk.Label(self,text="Add Title",font=("Arial","25"))
+                self.lbl_title = tk.Label(self,text="Add Game",font=("Arial","25"))
                 self.lbl_title.grid(row=0,column=0,sticky="news", columnspan=3)
+                
+                self.Genre = tk.Label(self,text="Genre:", font=("arial","18"))
+                self.Genre.grid(row=1,column=0,sticky="news")
+                
+                self.add_Genre = tk.Entry(self)
+                self.add_Genre.grid(row = 1, column = 1)
+                background = self.add_Genre.cget("bg")                  
                 
                 self.Title = tk.Label(self,text="Title:", font=("arial","18"))
                 self.Title.grid(row=1,column=2,sticky="news") 
@@ -197,13 +207,6 @@ class Add(Screen):
                 self.add_title = tk.Entry(self)
                 self.add_title.grid(row = 1, column =3)
                 background = self.add_title.cget("bg")        
-                
-                self.Genre = tk.Label(self,text="Genre:", font=("arial","18"))
-                self.Genre.grid(row=1,column=0,sticky="news")
-                
-                self.add_Genre = tk.Entry(self)
-                self.add_Genre.grid(row = 1, column = 1)
-                background = self.add_Genre.cget("bg")        
                 
                 self.dev = tk.Label(self,text="Dev:", font=("arial","18"))
                 self.dev.grid(row=2,column=0,sticky="news")
@@ -219,22 +222,58 @@ class Add(Screen):
                 self.add_Pub.grid(row = 2, column = 3)
                 background = self.add_Pub.cget("bg")        
             
-                self.Year = tk.Label(self,text="Year:", font=("arial","18"))
-                self.Year.grid(row=3,column=0,sticky="news")
+                self.system = tk.Label(self,text="System:", font=("arial","18"))
+                self.system.grid(row=3,column=0,sticky="news")
                 
-                self.add_year = tk.Entry(self)
-                self.add_year.grid(row = 3, column = 1)
-                background = self.add_year.cget("bg") 
+                self.add_system = tk.Entry(self)
+                self.add_system.grid(row = 3, column = 1)
+                background = self.add_system.cget("bg") 
                 
-                self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
-                self.Notes.grid(row=4,column=0,sticky="news")
+                self.release = tk.Label(self,text="Release Date:", font=("arial","18"))
+                self.release.grid(row=3,column=2,sticky="news")
+                
+                self.add_release = tk.Entry(self)
+                self.add_release.grid(row = 3, column = 3)
+                background = self.add_release.cget("bg")
                 
                 self.rating = tk.Label(self,text="Rating:", font=("arial","18"))
-                self.rating.grid(row=4,column=2,sticky="news")
+                self.rating.grid(row=4,column=0,sticky="news")
                 
-                self.Rating = tk.OptionMenu(self, self.tkvar,*self.options)                
-                self.Rating.grid(row = 4, column = 3, sticky='news') 
-                background = self.Rating.cget("bg")                
+                self.add_rating = tk.Entry(self)               
+                self.add_rating.grid(row = 4, column = 1, sticky='news') 
+                background = self.add_rating.cget("bg")                   
+                
+                self.coop = tk.Label(self,text="Multiplayer or Single:", font=("arial","18"))
+                self.coop.grid(row=4,column=2,sticky="news")
+                
+                self.add_coop = tk.Entry(self)
+                self.add_coop.grid(row = 4, column = 3)
+                background = self.add_coop.cget("bg")  
+                
+                self.price = tk.Label(self,text="Price:", font=("arial","18"))
+                self.price.grid(row=5,column=0,sticky="news")
+                
+                self.add_price = tk.Entry(self)
+                self.add_price.grid(row = 5, column = 1)
+                background = self.add_price.cget("bg")  
+                
+                self.beaten = tk.Label(self,text="Beaten Campaign:", font=("arial","18"))
+                self.beaten.grid(row=5,column=2,sticky="news")
+                
+                self.add_beaten = tk.Entry(self)
+                self.add_beaten.grid(row = 5, column = 3)
+                background = self.add_beaten.cget("bg")  
+                
+                self.pur_date = tk.Label(self,text="Purchase date:", font=("arial","18"))
+                self.pur_date.grid(row=6,column=0,sticky="news")
+                
+                self.add_pur_date = tk.Entry(self)
+                self.add_pur_date.grid(row = 6, column = 1)
+                background = self.add_pur_date.cget("bg")                  
+                
+                self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
+                self.Notes.grid(row=7,column=2,sticky="news")
+                             
                 
                 self.edit_space = ScrolledText(self,
                     wrap   = 'word',  # wrap text at full words only
@@ -243,7 +282,7 @@ class Add(Screen):
                     bg='blue'        # background color of edit area
                 )        
             
-                self.edit_space.grid(row=5, column=0)
+                self.edit_space.grid(row=8, column=2)
                 mytext = '''\
                 Did you ever hear the tragedy of Darth Plagueis "the wise"? I thought not. It's not a story the Jedi would tell you. It's a Sith legend.
                 Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life...
@@ -255,13 +294,13 @@ class Add(Screen):
                 self.edit_space.insert('insert', mytext)
                 
                 self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
-                self.btn_cancel.grid(row=6,column=0)
+                self.btn_cancel.grid(row=9,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
-                self.btn_clear.grid(row=6,column=1)
+                self.btn_clear.grid(row=9,column=1)
                 
                 self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"))
-                self.btn_submit.grid(row=6,column=3) 
+                self.btn_submit.grid(row=9,column=2) 
                 
                 
                 
@@ -320,11 +359,12 @@ class Edit_Select(tk.Frame):
                                                 screens[3].edit_key=i
                                                 screens[3].edit_update()
                                                 break                        
-                        Screen.switch_frame()
-                        self.parent.destroy()
+                                        Screen.switch_frame()
+                                        self.parent.destroy()
                         
                         
-                
+ #so in case other people use this this was made and designed by connor Gray
+ #this is where you will edit a selected file 
 class Edit(Screen):
         def __init__(self):
                 Screen.__init__(self)
@@ -338,50 +378,86 @@ class Edit(Screen):
                 self.lbl_title = tk.Label(self,text="Edit Title",font=("Arial","25"))
                 self.lbl_title.grid(row=0,column=0,sticky="news", columnspan=3)
                 
-                self.Title = tk.Label(self,text="Title:", font=("arial","18"))
-                self.Title.grid(row=1,column=2,sticky="news") 
+                self.genre = tk.Label(self,text="Genre:", font=("arial","18"))
+                self.genre.grid(row=1,column=0,sticky="news")
+                
+                self.edit_genre = tk.Entry(self)
+                self.edit_genre.grid(row = 1, column = 1)
+                background = self.edit_genre.cget("bg")                  
+                
+                self.title = tk.Label(self,text="Title:", font=("arial","18"))
+                self.title.grid(row=1,column=2,sticky="news") 
                 
                 self.edit_title = tk.Entry(self)
                 self.edit_title.grid(row = 1, column =3)
                 background = self.edit_title.cget("bg")        
                 
-                self.Genre = tk.Label(self,text="Genre:", font=("arial","18"))
-                self.Genre.grid(row=1,column=0,sticky="news")
-                
-                self.edit_Genre = tk.Entry(self)
-                self.edit_Genre.grid(row = 1, column = 1)
-                background = self.edit_Genre.cget("bg")        
-                
                 self.dev = tk.Label(self,text="Dev:", font=("arial","18"))
                 self.dev.grid(row=2,column=0,sticky="news")
                 
-                self.edit_Dev = tk.Entry(self)
-                self.edit_Dev.grid(row = 2, column = 1)
-                background = self.edit_Dev.cget("bg")        
+                self.edit_dev = tk.Entry(self)
+                self.edit_dev.grid(row = 2, column = 1)
+                background = self.edit_dev.cget("bg")        
                 
-                self.Pub = tk.Label(self,text="Pub:", font=("arial","18"))
-                self.Pub.grid(row=2,column=2,sticky="news")
+                self.pub = tk.Label(self,text="Pub:", font=("arial","18"))
+                self.pub.grid(row=2,column=2,sticky="news")
                 
-                self.edit_Pub = tk.Entry(self)
-                self.edit_Pub.grid(row = 2, column = 3)
-                background = self.edit_Pub.cget("bg")        
+                self.edit_pub = tk.Entry(self)
+                self.edit_pub.grid(row = 2, column = 3)
+                background = self.edit_pub.cget("bg")        
             
-                self.Year = tk.Label(self,text="Year:", font=("arial","18"))
-                self.Year.grid(row=3,column=0,sticky="news")
+                self.system = tk.Label(self,text="System:", font=("arial","18"))
+                self.system.grid(row=3,column=0,sticky="news")
                 
-                self.edit_year = tk.Entry(self)
-                self.edit_year.grid(row = 3, column = 1)
-                background = self.edit_year.cget("bg") 
+                self.edit_system = tk.Entry(self)
+                self.edit_system.grid(row = 3, column = 1)
+                background = self.edit_system.cget("bg") 
                 
-                self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
-                self.Notes.grid(row=4,column=0,sticky="news")
+                self.release = tk.Label(self,text="Release Date:", font=("arial","18"))
+                self.release.grid(row=3,column=2,sticky="news")
+                
+                self.edit_release = tk.Entry(self)
+                self.edit_release.grid(row = 3, column = 3)
+                background = self.edit_release.cget("bg")
                 
                 self.rating = tk.Label(self,text="Rating:", font=("arial","18"))
-                self.rating.grid(row=4,column=2,sticky="news")
+                self.rating.grid(row=4,column=0,sticky="news")
                 
-                self.Rating = tk.Entry(self)               
-                self.Rating.grid(row = 4, column = 3, sticky='news') 
-                background = self.Rating.cget("bg")                
+                self.edit_rating = tk.Entry(self)               
+                self.edit_rating.grid(row = 4, column = 1, sticky='news') 
+                background = self.edit_rating.cget("bg")                   
+                
+                self.coop = tk.Label(self,text="Multiplayer or Single:", font=("arial","18"))
+                self.coop.grid(row=4,column=2,sticky="news")
+                
+                self.edit_coop = tk.Entry(self)
+                self.edit_coop.grid(row = 4, column = 3)
+                background = self.edit_coop.cget("bg")  
+                
+                self.price = tk.Label(self,text="Price:", font=("arial","18"))
+                self.price.grid(row=5,column=0,sticky="news")
+                
+                self.edit_price = tk.Entry(self)
+                self.edit_price.grid(row = 5, column = 1)
+                background = self.edit_price.cget("bg")  
+                
+                self.beaten = tk.Label(self,text="Beaten Campaign:", font=("arial","18"))
+                self.beaten.grid(row=5,column=2,sticky="news")
+                
+                self.edit_beaten = tk.Entry(self)
+                self.edit_beaten.grid(row = 5, column = 3)
+                background = self.edit_beaten.cget("bg")  
+                
+                self.pur_date = tk.Label(self,text="Purchase date:", font=("arial","18"))
+                self.pur_date.grid(row=6,column=0,sticky="news")
+                
+                self.edit_pur_date = tk.Entry(self)
+                self.edit_pur_date.grid(row = 6, column = 1)
+                background = self.edit_pur_date.cget("bg")                  
+                
+                self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
+                self.Notes.grid(row=7,column=2,sticky="news")
+                             
                 
                 self.edit_space = ScrolledText(self,
                     wrap   = 'word',  # wrap text at full words only
@@ -390,7 +466,7 @@ class Edit(Screen):
                     bg='blue'        # background color of edit area
                 )        
             
-                self.edit_space.grid(row=5, column=0)
+                self.edit_space.grid(row=8, column=2)
                 mytext = '''\
                 Did you ever hear the tragedy of Darth Plagueis "the wise"? I thought not. It's not a story the Jedi would tell you. It's a Sith legend.
                 Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life...
@@ -402,13 +478,13 @@ class Edit(Screen):
                 self.edit_space.insert('insert', mytext)
                 
                 self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
-                self.btn_cancel.grid(row=6,column=0)
+                self.btn_cancel.grid(row=9,column=0)
                 
                 self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
-                self.btn_clear.grid(row=6,column=1)
+                self.btn_clear.grid(row=9,column=1)
                 
                 self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"),command= self.submit_edit)
-                self.btn_submit.grid(row=6,column=3) 
+                self.btn_submit.grid(row=9,column=2) 
                 
                 
                 
@@ -418,24 +494,46 @@ class Edit(Screen):
                 self.grid_columnconfigure(3,weight=1) 
                 
                 
-                
+                #this is what will change the read file
         def edit_update(self):
                 print("check check")
                 entry = games[self.edit_key]
-                self.edit_Genre.delete(0,"end")
-                self.edit_Genre.insert(0,entry[0])
                 
-                self.edit_Dev.delete(0,"end")
-                self.edit_Dev.insert(0,entry[2])
-                
-                self.edit_Pub.delete(0,"end")
-                self.edit_Pub.insert(0,entry[3])
+                self.edit_genre.delete(0,"end")
+                self.edit_genre.insert(0,entry[0])
                 
                 self.edit_title.delete(0,"end")
-                self.edit_title.insert(0,entry[1])
+                self.edit_title.insert(0,entry[1])                
                 
-                self.edit_year.delete(0,"end")
-                self.edit_year.insert(0,entry[10])
+                self.edit_dev.delete(0,"end")
+                self.edit_dev.insert(0,entry[2])
+                
+                self.edit_pub.delete(0,"end")
+                self.edit_pub.insert(0,entry[3])                
+                
+                self.edit_system.delete(0,"end")
+                self.edit_system.insert(0,entry[4])
+                
+                self.edit_release.delete(0,"end")
+                self.edit_release.insert(0,entry[5])
+                
+                self.edit_rating.delete(0,"end")
+                self.edit_rating.insert(0,entry[6])
+                
+                self.edit_coop.delete(0,"end")
+                self.edit_coop.insert(0,entry[7])
+                
+                self.edit_price.delete(0,"end")
+                self.edit_price.insert(0,entry[8])
+                
+                self.edit_beaten.delete(0,"end")
+                self.edit_beaten.insert(0,entry[9])                
+                
+                self.edit_pur_date.delete(0,"end")
+                self.edit_pur_date.insert(0,entry[10])
+                
+                self.edit_space.delete(0.0,"end")
+                self.edit_space.insert(0.0,entry[11])                
                 
         def go_home(self):
                 Screen.current=0
@@ -444,16 +542,24 @@ class Edit(Screen):
          #oh boy the submit command       
         def submit_edit(self):
                 entry =[]
-                entry.append(self.edit_Genre.get())
+                entry.append(self.edit_genre.get())
                 entry.append(self.edit_title.get())
-                entry.append(self.edit_Dev.get())
-                entry.append(self.edit_Pub.get())
-                entry.append(self.edit_year.get())
+                entry.append(self.edit_dev.get())
+                entry.append(self.edit_pub.get())
+                entry.append(self.edit_system.get())
+                entry.append(self.edit_release.get())
+                entry.append(self.edit_rating.get())
+                entry.append(self.edit_coop.get())
+                entry.append(self.edit_price.get())
+                entry.append(self.edit_beaten.get())
+                entry.append(self.edit_pur_date.get())
+                entry.append(self.edit_space.get(0.0,"end"))
                 games[self.edit_key]=entry
                 
                 Screen.current=0
                 Screen.switch_frame()                
-
+ #so in case other people use this this was made and designed by connor Gray 
+ #this is the remove scren which you use to selct a file to remove
 class Remove(tk.Frame):
         def __init__(self):
                 tk.Frame.__init__(self)
@@ -485,7 +591,8 @@ class Remove(tk.Frame):
                 Screen.current=0
                 Screen.switch_frame() 
                 
-                
+  #so in case other people use this this was made and designed by connor Gray 
+  #this is the verify screen for the remove, so you can confirm you want to get rid of something
 class Verify(tk.Frame):
         def __init__(self, remove): 
                 tk.Frame.__init__(self, master = parent)
