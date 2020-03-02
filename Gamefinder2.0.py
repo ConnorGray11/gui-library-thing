@@ -8,6 +8,7 @@
 import pickle
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
+from tkinter import messagebox
 
 
 #class
@@ -53,6 +54,18 @@ class MainMenu(Screen):
                 
         def go_add(self):
                 Screen.current=2
+                screens[Screen.current].add_genre.delete(0,"end")
+                screens[Screen.current].add_title.delete(0,"end")
+                screens[Screen.current].add_dev.delete(0,"end")
+                screens[Screen.current].add_pub.delete(0,"end")
+                screens[Screen.current].add_system.delete(0,"end")
+                screens[Screen.current].add_release.delete(0,"end")
+                screens[Screen.current].add_rating.delete(0,"end")
+                screens[Screen.current].add_coop.delete(0,"end")
+                screens[Screen.current].add_price.delete(0,"end")
+                screens[Screen.current].add_pur_date.delete(0,"end")
+                screens[Screen.current].add_beaten.delete(0,"end")
+                screens[Screen.current].edit_space.delete(0.0,"end")
                 Screen.switch_frame() 
                 
         def go_search(self):
@@ -180,12 +193,15 @@ class Search(Screen):
         def go_home(self):
                 Screen.current=0
                 Screen.switch_frame()    
+                
+                
    #so in case other people use this this was made and designed by connor Gray 
    #you can add files to the program here
 class Add(Screen):
         def __init__(self):
                 Screen.__init__(self)
                 self.options=["one","two"]
+                self.edit_key = 0
                 self.tkvar=tk.StringVar(self)
                 self.tkvar.set(self.options[0])
                 
@@ -194,15 +210,15 @@ class Add(Screen):
                 self.lbl_title = tk.Label(self,text="Add Game",font=("Arial","25"))
                 self.lbl_title.grid(row=0,column=0,sticky="news", columnspan=3)
                 
-                self.Genre = tk.Label(self,text="Genre:", font=("arial","18"))
-                self.Genre.grid(row=1,column=0,sticky="news")
+                self.genre = tk.Label(self,text="Genre:", font=("arial","18"))
+                self.genre.grid(row=1,column=0,sticky="news")
                 
-                self.add_Genre = tk.Entry(self)
-                self.add_Genre.grid(row = 1, column = 1)
-                background = self.add_Genre.cget("bg")                  
+                self.add_genre = tk.Entry(self)
+                self.add_genre.grid(row = 1, column = 1)
+                background = self.add_genre.cget("bg")                  
                 
-                self.Title = tk.Label(self,text="Title:", font=("arial","18"))
-                self.Title.grid(row=1,column=2,sticky="news") 
+                self.title = tk.Label(self,text="Title:", font=("arial","18"))
+                self.title.grid(row=1,column=2,sticky="news") 
                 
                 self.add_title = tk.Entry(self)
                 self.add_title.grid(row = 1, column =3)
@@ -211,16 +227,16 @@ class Add(Screen):
                 self.dev = tk.Label(self,text="Dev:", font=("arial","18"))
                 self.dev.grid(row=2,column=0,sticky="news")
                 
-                self.add_Dev = tk.Entry(self)
-                self.add_Dev.grid(row = 2, column = 1)
-                background = self.add_Dev.cget("bg")        
+                self.add_dev = tk.Entry(self)
+                self.add_dev.grid(row = 2, column = 1)
+                background = self.add_dev.cget("bg")        
                 
                 self.Pub = tk.Label(self,text="Pub:", font=("arial","18"))
                 self.Pub.grid(row=2,column=2,sticky="news")
                 
-                self.add_Pub = tk.Entry(self)
-                self.add_Pub.grid(row = 2, column = 3)
-                background = self.add_Pub.cget("bg")        
+                self.add_pub = tk.Entry(self)
+                self.add_pub.grid(row = 2, column = 3)
+                background = self.add_pub.cget("bg")        
             
                 self.system = tk.Label(self,text="System:", font=("arial","18"))
                 self.system.grid(row=3,column=0,sticky="news")
@@ -296,10 +312,10 @@ class Add(Screen):
                 self.btn_cancel=tk.Button(self,text="Cancel",font=("Arial","15"),command= self.go_home)
                 self.btn_cancel.grid(row=9,column=0)
                 
-                self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"))
+                self.btn_clear=tk.Button(self,text="Clear",font=("Arial","15"),command = self.clear)
                 self.btn_clear.grid(row=9,column=1)
                 
-                self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"))
+                self.btn_submit=tk.Button(self,text="Submit",font=("Arial","15"),command=self.submit_add)
                 self.btn_submit.grid(row=9,column=2) 
                 
                 
@@ -311,7 +327,44 @@ class Add(Screen):
                 
         def go_home(self):
                 Screen.current=0
-                Screen.switch_frame()         
+                Screen.switch_frame()  
+                
+        def submit_add(self):
+                entry =[]
+                entry.append(self.add_genre.get())
+                entry.append(self.add_title.get())
+                entry.append(self.add_dev.get())
+                entry.append(self.add_pub.get())
+                entry.append(self.add_system.get())
+                entry.append(self.add_release.get())
+                entry.append(self.add_rating.get())
+                entry.append(self.add_coop.get())
+                entry.append(self.add_price.get())
+                entry.append(self.add_beaten.get())
+                entry.append(self.add_pur_date.get())
+                entry.append(self.edit_space.get(0.0,"end"))
+                games[len(games)+1]=entry
+                
+                messagebox.showinfo(message="entry has been added, please use save button to save to file")
+                
+                Screen.current=0
+                Screen.switch_frame()     
+                
+        def clear(self):
+                self.add_genre.delete(0,"end")
+                self.add_title.delete(0,"end")
+                self.add_dev.delete(0,"end")
+                self.add_pub.delete(0,"end")
+                self.add_system.delete(0,"end")
+                self.add_release.delete(0,"end")
+                self.add_rating.delete(0,"end")
+                self.add_coop.delete(0,"end")
+                self.add_price.delete(0,"end")
+                self.add_pur_date.delete(0,"end")
+                self.add_beaten.delete(0,"end")     
+                self.edit_space.delete(0.0,"end")   
+                
+                
 
 class Edit_Select(tk.Frame):
         def __init__(self, parent):
@@ -359,9 +412,9 @@ class Edit_Select(tk.Frame):
                                                 screens[3].edit_key=i
                                                 screens[3].edit_update()
                                                 break                        
-                                        Screen.switch_frame()
-                                        self.parent.destroy()
-                        
+                Screen.switch_frame()
+                self.parent.destroy()
+                
                         
  #so in case other people use this this was made and designed by connor Gray
  #this is where you will edit a selected file 
@@ -458,7 +511,7 @@ class Edit(Screen):
                 self.Notes = tk.Label(self,text="Notes:", font=("arial","18"))
                 self.Notes.grid(row=7,column=2,sticky="news")
                              
-                
+                #this is good way of doing scrolled text
                 self.edit_space = ScrolledText(self,
                     wrap   = 'word',  # wrap text at full words only
                     width  = 40,      # characters
@@ -494,7 +547,7 @@ class Edit(Screen):
                 self.grid_columnconfigure(3,weight=1) 
                 
                 
-                #this is what will change the read file
+                #this is what will actually put the edits into action
         def edit_update(self):
                 print("check check")
                 entry = games[self.edit_key]
@@ -535,11 +588,13 @@ class Edit(Screen):
                 self.edit_space.delete(0.0,"end")
                 self.edit_space.insert(0.0,entry[11])                
                 
+        #sends you home
         def go_home(self):
+                
                 Screen.current=0
                 Screen.switch_frame()
                 
-         #oh boy the submit command       
+         #oh boy the submit command, this will change everything youve edited in and send you home    
         def submit_edit(self):
                 entry =[]
                 entry.append(self.edit_genre.get())
@@ -609,7 +664,7 @@ class Verify(tk.Frame):
                     height = 10,      # text lines
                     bg='blue'        # background color of edit area
                 )        
-            
+            #flavor text
                 self.edit_space.grid(row=2, column=0)
                 mytext = '''\
                 Did you ever hear the tragedy of Darth Plagueis "the wise"? I thought not. It's not a story the Jedi would tell you. It's a Sith legend.
@@ -634,9 +689,16 @@ class Verify(tk.Frame):
                 Screen.current=0
                 Screen.switch_frame()                 
                 
+                
+                #this is what will save all your changes and additions to your file
 class Save(Screen):
         def __init__(self):
                 Screen.__init__(self)
+                
+                pickle_file = open("game_lib.pickle", "wb")
+                pickle.dump(games, pickle_file)
+                pickle_file.close()   
+                print("congrats it saved all your changes")                
                 
                 self.Title = tk.Label(self,text="File saved. ", font=("arial","18"))
                 self.Title.grid(row=0,column=0,sticky="news")
